@@ -1,13 +1,13 @@
-package com.AssessPro.demo;
+package com.AssessPro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
+public class AssessProApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(AssessProApplication.class, args);
 	}
 
 }
