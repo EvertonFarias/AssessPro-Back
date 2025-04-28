@@ -12,12 +12,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
-@Table(name = "profile")
+@Table(name = "profiles")
 public class ProfileModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -33,8 +36,8 @@ public class ProfileModel {
     private String city;
     private String state;
     private String country;
-    @OneToMany(mappedBy = "responsible")
-    private List<EvaluationModel> evaluationsResponsible;
+    // @OneToMany(mappedBy = "responsible")
+    // private List<EvaluationModel> evaluationsResponsible;
 
 
     public ProfileModel(UserModel user) {

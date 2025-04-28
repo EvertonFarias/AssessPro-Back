@@ -42,13 +42,12 @@ public class UserModel implements UserDetails {
     private UserRole role;
 
 
-    public UserModel(String login, String password, UserRole role, String email){
+    public UserModel(String login, String password, String email){
         this.login = login;
         this.password = password;
-        this.role = role;
+        this.role = UserRole.USER;
         this.email = email;
         this.enabled = true;
-    
     }
 
     @Override

@@ -5,7 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.inovaTest.dtos.auth.RegisterDTO;
-import com.example.inovaTest.exceptions.UserAlreadyExistsException;
+import com.example.inovaTest.exceptions.ConflictException;
 import com.example.inovaTest.models.ProfileModel;
 import com.example.inovaTest.models.UserModel;
 import com.example.inovaTest.repositories.ProfileRepository;
@@ -23,13 +23,16 @@ public class AuthService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public UserModel registerUser(RegisterDTO data) throws UserAlreadyExistsException {
+    public UserModel registerUser(RegisterDTO data) throws ConflictException {
         // Verificar se o usuário já existe
         if (userRepository.findByLogin(data.login()) != null) {
-            throw new UserAlreadyExistsException("User already exists.");
+            throw new ConflictException("User already exists.");
+        }
+        if (userRepository.findByEmail(data.email()) != null) {
+            throw new ConflictException("Email already exists.");
         }
         String encryptedPassword = passwordEncoder.encode(data.password());
-        UserModel newUser = new UserModel(data.login(), encryptedPassword, data.role(), data.email());
+        UserModel newUser = new UserModel(data.login(), encryptedPassword, data.email());
         userRepository.save(newUser);
 
 

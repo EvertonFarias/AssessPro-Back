@@ -9,4 +9,5 @@ import com.example.inovaTest.models.UserModel;
 
 public interface UserRepository extends JpaRepository<UserModel, UUID> {
     UserDetails findByLogin(String login);
+    UserDetails findByEmail(String email);
 }

@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.inovaTest.dtos.auth.AuthenticationDTO;
 import com.example.inovaTest.dtos.auth.LoginResponseDTO;
 import com.example.inovaTest.dtos.auth.RegisterDTO;
-import com.example.inovaTest.exceptions.UserAlreadyExistsException;
+import com.example.inovaTest.dtos.reponses.UserResponseDTO;
+import com.example.inovaTest.exceptions.ConflictException;
 import com.example.inovaTest.infra.security.TokenService;
 import com.example.inovaTest.models.UserModel;
 import com.example.inovaTest.services.AuthService;
@@ -42,12 +43,20 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody @Valid RegisterDTO data){
         try {
-            UserModel newUser = authService.registerUser(data);
-            return ResponseEntity.ok(newUser); // Retorna o usuário criado com status 200
-        } catch (UserAlreadyExistsException e) {
-            return ResponseEntity.badRequest().body("User already exists.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
+        UserModel newUser = authService.registerUser(data);
+        UserResponseDTO responseDTO = new UserResponseDTO(
+            newUser.getId(),
+            newUser.getLogin(),
+            newUser.getEmail(),
+            newUser.getRole()
+        );
+        
+        return ResponseEntity.ok(responseDTO); // Retorna o DTO com os dados específicos
+        } catch (ConflictException e) {
+            String errorMessage = e.getMessage(); 
+            return ResponseEntity.badRequest().body(errorMessage);
+        } catch (Exception e) { 
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while processing the request.");
         }
     }
 }
