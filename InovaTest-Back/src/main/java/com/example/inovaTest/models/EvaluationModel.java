@@ -33,8 +33,10 @@ public class EvaluationModel {
     
     @ManyToOne
     @JoinColumn(name = "responsible_evaluation", nullable = false)
-    
     private ProfileModel responsible; // responsável pela avaliação
+    private String name; 
+    @Column(name = "evaluationCode", nullable = false, unique = true)
+    private String evaluationCode;
     private LocalDate dateEvaluation; // data da avaliação
     @Column(nullable = false)
     private String description; // descrição da avaliação

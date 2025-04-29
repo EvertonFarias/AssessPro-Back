@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.inovaTest.dtos.auth.AuthenticationDTO;
 import com.example.inovaTest.dtos.auth.LoginResponseDTO;
 import com.example.inovaTest.dtos.auth.RegisterDTO;
-import com.example.inovaTest.dtos.reponses.UserResponseDTO;
+import com.example.inovaTest.dtos.user.UserResponseDTO;
 import com.example.inovaTest.exceptions.ConflictException;
 import com.example.inovaTest.infra.security.TokenService;
 import com.example.inovaTest.models.UserModel;

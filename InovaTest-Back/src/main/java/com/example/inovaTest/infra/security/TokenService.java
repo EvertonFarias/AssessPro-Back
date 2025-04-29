@@ -18,12 +18,13 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
-    public String generateToken(UserModel user){
-        try{
+    public String generateToken(UserModel user) {
+        try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
                     .withIssuer("auth-api")
                     .withSubject(user.getLogin())
+                    .withClaim("role", user.getRole().name()) // <- Aqui adicionamos a role
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
             return token;
@@ -31,6 +32,7 @@ public class TokenService {
             throw new RuntimeException("Error while generating token", exception);
         }
     }
+    
 
     public String validateToken(String token){
         try {

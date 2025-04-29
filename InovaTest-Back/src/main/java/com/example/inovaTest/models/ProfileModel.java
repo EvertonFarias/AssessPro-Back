@@ -2,8 +2,6 @@ package com.example.inovaTest.models;
 
 import java.util.List;
 import java.util.UUID;
-
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,8 +34,8 @@ public class ProfileModel {
     private String city;
     private String state;
     private String country;
-    // @OneToMany(mappedBy = "responsible")
-    // private List<EvaluationModel> evaluationsResponsible;
+    @OneToMany(mappedBy = "responsible")
+    private List<EvaluationModel> evaluationsResponsible;
 
 
     public ProfileModel(UserModel user) {

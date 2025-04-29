@@ -1,4 +1,4 @@
-package com.example.inovaTest.dtos.reponses;
+package com.example.inovaTest.dtos.user;
 
 import java.util.UUID;
 

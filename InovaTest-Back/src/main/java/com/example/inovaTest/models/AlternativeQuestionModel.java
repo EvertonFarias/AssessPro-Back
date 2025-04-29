@@ -19,7 +19,7 @@ public class AlternativeQuestionModel {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "question_id")
+    @JoinColumn(name = "question_id", nullable = false)
     private QuestionModel question; // A questão à qual essa alternativa pertence
 
     private String description; // Descrição da alternativa

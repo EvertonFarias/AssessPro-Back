@@ -1,16 +1,16 @@
 package com.example.inovaTest.seeders;
 
  
-import java.util.List;
  
-import java.util.Optional;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.example.inovaTest.enums.UserRole;
+import com.example.inovaTest.models.ProfileModel;
 import com.example.inovaTest.models.UserModel;
+import com.example.inovaTest.repositories.ProfileRepository;
 import com.example.inovaTest.repositories.UserRepository;
 
 
@@ -18,11 +18,13 @@ import com.example.inovaTest.repositories.UserRepository;
 public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
 
     private final UserRepository userRepository;
+    private final ProfileRepository profileRepository;
     private final PasswordEncoder passwordEncoder;
 
     private boolean alreadySetup = false;
 
-    public DataSeeder(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public DataSeeder(UserRepository userRepository, PasswordEncoder passwordEncoder, ProfileRepository profileRepository) {
+        this.profileRepository = profileRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -43,6 +45,10 @@ public class DataSeeder implements ApplicationListener<ContextRefreshedEvent> {
             admin.setRole(UserRole.ADMIN); // ← transforma em lista
             admin.setEnabled(true);
             userRepository.save(admin);
+            ProfileModel profile = new ProfileModel(admin);
+            profileRepository.save(profile);
+
+
             System.out.println("Admin user created: " + admin.getLogin());
         alreadySetup = true;
     }

@@ -41,8 +41,8 @@ public class QuestionModel {
     private QuestionTypeEnum question_type; //tipo da questão (alternativa, dissertativa, etc)
     private String question_answer; //resposta correta
 
-    // @OneToMany(mappedBy = "question")
-    // private List<AlternativeQuestionModel> alternatives;//alternativas da questão (se houver)
+    @OneToMany(mappedBy = "question")
+    private List<AlternativeQuestionModel> alternatives; //alternativas da questão (se houver)
      
     private String text_response; // resposta para questões dissertativas
 
