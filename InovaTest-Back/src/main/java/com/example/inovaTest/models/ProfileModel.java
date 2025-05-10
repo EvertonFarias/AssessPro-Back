@@ -1,5 +1,6 @@
 package com.example.inovaTest.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import jakarta.persistence.Entity;
@@ -35,14 +36,15 @@ public class ProfileModel {
     private String state;
     private String country;
     @OneToMany(mappedBy = "responsible")
-    private List<EvaluationModel> evaluationsResponsible;
+    private List<EvaluationModel> evaluationsResponsible = new ArrayList<>();
+
 
 
     public ProfileModel(UserModel user) {
         this.user = user;
     }
 
-    public ProfileModel(String name, String email, String phoneNumber, String address, String city, String state, String country) {
+    public ProfileModel(String name, String phoneNumber, String address, String city, String state, String country) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.address = address;
