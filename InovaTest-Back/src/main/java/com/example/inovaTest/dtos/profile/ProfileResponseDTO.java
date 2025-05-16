@@ -7,6 +7,7 @@ import com.example.inovaTest.models.ProfileModel;
 public record ProfileResponseDTO(
     UUID id,
     UUID userId,
+    boolean isVerifiedEmail,
     String name,
     String phoneNumber,
     String address,
@@ -18,6 +19,7 @@ public record ProfileResponseDTO(
         this(
             profile.getId(),
             profile.getUser().getId(),
+            profile.getUser().isVerifiedEmail(),
             profile.getName(),
             profile.getPhoneNumber(),
             profile.getAddress(),

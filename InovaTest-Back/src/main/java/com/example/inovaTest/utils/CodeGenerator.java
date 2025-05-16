@@ -4,7 +4,7 @@ import java.security.SecureRandom;
 
 public class CodeGenerator {
     private static final String CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    private static final int CODE_LENGTH = 8; // Ou 10, 12 etc.
+    private static final int CODE_LENGTH = 8; // tamanho do codigo, caso eu queira alterar futuramente
     private static final SecureRandom RANDOM = new SecureRandom();
 
     public static String generateCode() {

@@ -35,6 +35,7 @@ public class UserModel implements UserDetails {
     @NotBlank(message = "Email is required")
     @Email(message = "Email is invalid")
     private String email;
+    private boolean verifiedEmail;
     private boolean enabled;
 
 
@@ -47,6 +48,7 @@ public class UserModel implements UserDetails {
         this.password = password;
         this.role = UserRole.USER;
         this.email = email;
+        this.verifiedEmail = false;
         this.enabled = true;
     }
 

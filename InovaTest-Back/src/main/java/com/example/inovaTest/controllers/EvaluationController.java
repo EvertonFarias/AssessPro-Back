@@ -13,7 +13,6 @@ import com.example.inovaTest.utils.CodeGenerator;
 
 import jakarta.validation.Valid;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
